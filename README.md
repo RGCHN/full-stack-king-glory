@@ -1,1 +1,1 @@
-# full-stack-king-glory
+# This is a full-stack project modify King-Glory game homepage
