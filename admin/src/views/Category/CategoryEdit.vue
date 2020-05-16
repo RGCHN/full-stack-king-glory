@@ -22,11 +22,7 @@
 <script>
     export default {
         name: "CategoryEdit",
-        props:{
-            id:{
-                type:String
-            }
-        },
+        props:{id:{type:String}},
         data(){
             return {
                 model:{},
@@ -44,7 +40,7 @@
                 }
 
                 //创建完毕后跳转到分类列表
-                await  this.$router.push('est/categories/list');
+                await  this.$router.push('/categories/list');
                 this.$message({
                     type:'success',
                     message:'保存成功！'
