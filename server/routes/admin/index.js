@@ -13,13 +13,13 @@ module.exports = app => {
         const model = await req.Model.create(req.body);
         res.send(model);
     })
-    //资源列表限制10条数据
+    //资源列表 限制100条数据
     router.get('/',async(req,res)=>{
         const queryOptions = {};
         if(req.Model.modelName === 'Category'){
-            queryOptions.popular = 'parent';
+            queryOptions.populate = 'parent';
         }
-        const items = await req.Model.find().setOptions(queryOptions).limit(10);
+        const items = await req.Model.find().setOptions(queryOptions).limit(100);
         res.send(items);
     })
     //获取资源详情

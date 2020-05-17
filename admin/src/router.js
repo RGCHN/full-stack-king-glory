@@ -1,15 +1,18 @@
 import Vue from 'vue'
 import VueRouter from  'vue-router'
 
-const Home = ()=>import('./src/views/Home');
-const CategoryEdit = ()=>import('./src/views/Category/CategoryEdit');
-const CategoryList = ()=>import('./src/views/Category/CategoryList');
+const Home = ()=>import('./views/Home');
+const CategoryEdit = ()=>import('./views/Category/CategoryEdit');
+const CategoryList = ()=>import('./views/Category/CategoryList');
 
-const ItemEdit = ()=>import('./src/views/item/itemEdit');
-const ItemList = ()=>import('./src/views/item/itemList');
+const ItemEdit = ()=>import('./views/item/itemEdit');
+const ItemList = ()=>import('./views/item/itemList');
 
-const HeroEdit = ()=>import('./src/views/hero/HeroEdit');
-const HeroList = ()=>import('./src/views/hero/HeroList');
+const HeroEdit = ()=>import('./views/hero/HeroEdit');
+const HeroList = ()=>import('./views/hero/HeroList');
+
+const ArticleEdit = ()=>import('./views/articles/ArticleEdit');
+const ArticleList = ()=>import('./views/articles/ArticleList');
 
 Vue.use(VueRouter);
 
@@ -36,6 +39,10 @@ const routes = [
             {path:'/hero/create', component:HeroEdit},
             {path:'/hero/list', component:HeroList},
             {path:'/hero/edit/:id',component:HeroEdit,props:true},
+
+            {path:'/articles/create', component:ArticleEdit},
+            {path:'/articles/list', component:ArticleList},
+            {path:'/articles/edit/:id',component:ArticleEdit,props:true},
         ]
     },
 

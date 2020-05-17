@@ -11,7 +11,8 @@
     "core-js": "^3.6.4",
     "element-ui": "^2.13.1",
     "node-sass": "^4.13.1",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue2-editor": "^2.10.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",
@@ -40,10 +41,10 @@
     },
     "rules": {
       "generator-star-spacing": "off",
-      "no-tabs":"off",
-      "no-unused-vars":"off",
-      "no-console":"off",
-      "no-irregular-whitespace":"off",
+      "no-tabs": "off",
+      "no-unused-vars": "off",
+      "no-console": "off",
+      "no-irregular-whitespace": "off",
       "no-debugger": "off"
     }
   },
