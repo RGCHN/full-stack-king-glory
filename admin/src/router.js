@@ -17,6 +17,9 @@ const ArticleList = ()=>import('./views/articles/ArticleList');
 const AdEdit = ()=>import('./views/AD/AdEdit');
 const AdList = ()=>import('./views/AD/AdList');
 
+const AdminUserEdit = ()=>import('./views/admin/AdminUserEdit');
+const AdminUserList = ()=>import('./views/admin/AdminUserList');
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -50,6 +53,10 @@ const routes = [
             {path:'/ads/create', component:AdEdit},
             {path:'/ads/list', component:AdList},
             {path:'/ads/edit/:id',component:AdEdit,props:true},
+
+            {path:'/admin_users/create', component:AdminUserEdit},
+            {path:'/admin_users/list', component:AdminUserList},
+            {path:'/admin_users/edit/:id',component:AdminUserEdit,props:true},
         ]
     },
 
