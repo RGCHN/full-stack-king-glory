@@ -5,7 +5,7 @@
             <el-form-item label="名称">
                 <el-input v-model="model.name"></el-input>
             </el-form-item>
-            <el-form-item>
+            <el-form-item label="广告">
                 <el-button size="small" @click="model.items.push({})">
                     <i class="el-icon-plus"></i> 添加广告
                 </el-button>
@@ -26,12 +26,12 @@
                             </el-upload>
                         </el-form-item>
                         <el-form-item>
-                            <el-button size="small" type="danger" @click="model.items.splice(index,1)">
-                                删除</el-button>
+                            <el-button size="small" type="danger" @click="model.items.splice(index,1)">删除</el-button>
                         </el-form-item>
                     </el-col>
                 </el-row>
             </el-form-item>
+
             <el-form-item>
                 <el-button type="primary" native-type="submit">保存</el-button>
             </el-form-item>
@@ -43,7 +43,9 @@
 
     export default {
         name: "AdEdit",
-        props:{id:{type:String}},
+        props:{
+        id:{}
+        },
         data(){
             return {
                 model:{
