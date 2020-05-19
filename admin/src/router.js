@@ -20,18 +20,14 @@ const AdList = ()=>import('./views/AD/AdList');
 const AdminUserEdit = ()=>import('./views/admin/AdminUserEdit');
 const AdminUserList = ()=>import('./views/admin/AdminUserList');
 
+const Login = ()=>import('./views/Login');
+
 Vue.use(VueRouter);
 
 const routes = [
+    {path:'/login', name:'login', component:Login,meta:{isPublic:true}},
     {
-        path:'',
-        redirect:'/home',
-        component:Home
-    },
-    {
-        path:'/home',
-        name:'home',
-        component:Home,
+        path:'/', name:'home', component:Home,
         children:[
             {path:'/categories/create', component:CategoryEdit},
             {path:'/categories/list', component:CategoryList},
@@ -66,5 +62,13 @@ const routes = [
 const router = new VueRouter({
     routes,
     mode:'history'
+})
+
+//客户端路由限制 若页面不能公开访问且token不存在 则跳转到login页面
+router.beforeEach((to,from,next)=>{
+    if(!to.meta.isPublic && !localStorage.token){
+      return next('/login')
+    }
+    next()
 })
 export default router

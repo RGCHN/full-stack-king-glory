@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "element-ui": "^2.13.1",
+    "http-assert": "^1.4.1",
     "node-sass": "^4.14.1",
     "vue": "^2.6.11",
     "vue2-editor": "^2.10.2"
