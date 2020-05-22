@@ -1,0 +1,43 @@
+$colors:(
+        "primary":#db9e3f,
+        "swiper-dot":#4b67af,
+        "white":#fff,
+        "light":#f9f9f9,
+        "light-1":#d4d9de,
+        "gray-lighter":#999,
+        "gray":#666,
+        "dark-lighter":#343440,
+        "dark":#222,
+        "black":#000,
+);
+$border-color:map_get($colors,'light-1');
+
+$base-font-size:13px;
+$font-sizes:(
+        "xxs":0.615,//8px
+        "xs":0.769,//10px
+        "sm":0.923,//12px
+        "md":1,//13px
+        "lg":1.077,//14px
+        "xl":1.231,//16px
+);
+
+$flex-jc:(
+        "start":flex-start,
+        "end":flex-end,
+        "center":center,
+        "between":space-between,
+        "around":space-around,
+);
+
+$flex-ai:(
+        "start":flex-start,
+        "end":flex-end,
+        "center":center,
+        "stretch":stretch
+);
+
+$spacing-types:("m":margin, "p":padding);
+$spacing-directions:("t":top,"b":bottom,"l":left,"r":right);
+$spacing-base-size:1rem;
+$spacing-sizes:("0":0,"1":0.25,"2":0.5,"3":1,"4":1.5,"5":3);

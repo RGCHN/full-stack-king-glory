@@ -1,0 +1,225 @@
+@import './variable';
+//reset
+*{
+    //必须修改为border-box 防止增加padding时内容被撑大 网页可以左右移动
+    box-sizing: border-box;
+    outline:none
+}
+html{
+    //基础字体大小 1rem就是html中font-size的大小
+    font-size:13px;
+}
+body{
+    margin: 0;
+    font-family: Arial,Helvetica,sans-serif;
+    line-height: 1.2em;
+    background: #F1F1F1;
+}
+a{
+    color:#999;
+}
+
+//定义文字和背景颜色 键值对
+@each $colorKey,$color in $colors{
+    .text-#{$colorKey}{
+        color: $color;
+    }
+    .bg-#{$colorKey}{
+        background-color: $color;
+    }
+}
+
+//定义文本对齐方式工具类
+@each  $var in (left,center,right){
+    .text-#{$var}{
+        text-align: $var;
+    }
+}
+
+//定义字体大小
+@each $sizeKey,$size in $font-sizes{
+    .fs-#{$sizeKey}{
+        font-size:$size * $base-font-size;
+    }
+}
+
+//宽度、高度相关样式
+.w-100{
+    width: 100%;
+}
+.h-100{
+    height: 100%;
+}
+
+//flex布局相关
+.d-flex{
+    display: flex;
+}
+.flex-column{
+    flex-direction: column;
+}
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
+
+@each $jcKey,$jcVal in $flex-jc{
+    .jc-#{$jcKey}{
+        justify-content: $jcVal;
+    }
+}
+
+
+@each $aiKey,$aiVal in $flex-ai{
+    .ai-#{$aiKey}{
+        align-items: $aiVal;
+    }
+
+}
+.flex-1{
+    flex:1;
+}
+.flex-grow-1{
+    flex-grow: 1;
+}
+
+//边距设置
+@each $typeKey,$typeVal in $spacing-types{
+    //样式m-0 p-3 设置margin或者padding四个方向等值
+    @each $sizeKey,$sizeVal in $spacing-sizes{
+        .#{$typeKey}-#{$sizeKey}{
+            #{$typeVal}:$sizeVal*$spacing-base-size;
+        }
+    }
+    //样式 mx-1..... x表示水平方向 left或right 设置margin或者padding水平方向等值
+    @each $sizeKey,$sizeVal in $spacing-sizes{
+        .#{$typeKey}x-#{$sizeKey}{
+            #{$typeVal}-left:$sizeVal*$spacing-base-size;
+            #{$typeVal}-right:$sizeVal*$spacing-base-size;
+        }
+    }
+    //样式my-1 py-2 y表示垂直方向
+    @each $sizeKey,$sizeVal in $spacing-sizes{
+        .#{$typeKey}y-#{$sizeKey}{
+            #{$typeVal}-top:$sizeVal*$spacing-base-size;
+            #{$typeVal}-bottom:$sizeVal*$spacing-base-size;
+        }
+    }
+
+    //样式.mt-1 .pr-2..........
+   @each $directionKey,$directionVal in $spacing-directions{
+       @each $sizeKey,$sizeVal in $spacing-sizes{
+           .#{$typeKey}#{$directionKey}-#{$sizeKey}{
+               #{$typeVal}-#{$directionVal}:$sizeVal*$spacing-base-size;
+           }
+       }
+   }
+}
+
+
+//按钮样式
+.btn{
+    border:none;
+    border-radius: 0.154rem;
+    font-size: map-get($font-sizes,'sm') * ($base-font-size);
+    -webkit-font-smoothing: antialiased;
+    padding:0.2rem 0.6rem;
+}
+
+//导航菜单样式
+.nav{
+    display: flex;
+    .nav-item{
+        border-bottom: 3px solid transparent;
+        padding-bottom: 0.2rem;
+        color:map-get($colors,'primary');
+        &.active{
+            border-bottom-color:map_get($colors,'primary');
+        }
+    }
+    &.nav-inverse{
+        .nav-item{
+            color: map-get($colors,'white');
+            &.active{
+                border-bottom-color: #fff;
+            }
+        }
+    }
+}
+
+//sprite图相关
+.sprite{
+    background:url("../home-images/sprite.png") no-repeat 0 0;
+    background-size: 28.846rem;
+    display: inline-block;
+    &.sprite-arrow{
+        background: url("../home-images/shouqi.png") no-repeat 0 0;
+        height: 1.769rem;
+        width: 1.769rem;
+    }
+    &.sprite-news{
+        width: 1.769rem;
+        height: 1.538rem;
+        background-position: 63.546% 15.517%;
+    }
+    &.sprite-story{
+        width: 1.769rem;
+        height: 1.538rem;
+        background-position: 90.483% 15.614%;;
+    }
+    &.sprite-mall{
+        width: 1.462rem;
+        height: 1.692rem;
+        background-position: 36.746% 0.924%;
+    }
+    &.sprite-ava{
+        width: 1.538rem;
+        height: 1.538rem;
+        background-position: 10.408% 15.517%;
+    }
+    &.sprite-fresh{
+        width: 1.538rem;
+        height: 1.615rem;
+        background-position: 89.733% 1.266%;
+    }
+    &.sprite-inherit{
+        width: 1.846rem;
+        height: 1.538rem;
+        background-position: 36.467% 15.287%;
+    }
+    &.sprite-modify{
+        width: 2.385rem;
+        height: 1.923rem;
+        background-position:  9.302% 0.813%
+    }
+    &.sprite-camp{
+        width: 1.846rem;
+        height:  1.846rem;
+        background-position: 63.3% 0.927%;
+    }
+    &.sprite-wechat{
+        width: 1.846rem;
+        height: 1.538rem;
+        background-position:  0 96.207%;
+    }
+    &.sprite-version{
+        background: url("../home-images/version-icon.png") no-repeat 33.333% 33.333%;
+        background-size: 1.923rem 1.923rem;
+        width: 1.846rem;
+        height: 1.846rem;
+    }
+    &.sprite-env{
+       background: url("../home-images/djhj.png") no-repeat 0 0;
+        background-size: 2.615rem 1.615rem;
+        width: 2.615rem;
+        height: 1.615rem;
+    }
+    &.sprite-inf{
+       background: url("../home-images/wxwzt.png") no-repeat 0 0;
+        background-size: 2.462rem 0.692rem;
+        width: 2.462rem;
+        height: 0.692rem;
+    }
+
+}
+
