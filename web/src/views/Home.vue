@@ -7,16 +7,16 @@
             <div class="swiper-pagination pagination-home px-3 pb-2" slot="pagination" style="text-align: right"></div>
         </swiper>
 
-        <div class="nav-icons bg-white mt-3 text-center pt-4 text-gray-lighter">
+        <div class="nav-icons bg-white mt-3 text-center pt-3 text-dark-lighter">
             <div class="d-flex flex-wrap ai-end">
-                <div class="nav-item" v-for="(value,key,index) in navList" :key="index">
+                <div class="nav-item pt-2" v-for="(value,key,index) in navList" :key="index">
                     <i class="sprite" :class="key"></i>
                     <p>{{value}}</p>
                 </div>
             </div>
             <div class="bg-light py-2 fs-sm">
-                <p>收起</p>
-                <i class="iconfont icon-shouqi"></i>
+                <i class="iconfont icon-shouqi px-1"></i>
+                <span>收起</span>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
             <swiper>
                 <swiper-slide v-for="i in 5" :key="i">
                     <div v-for="n in 6" :key="n" class="pt-3">
-                        <span>[新闻]</span><span>|</span><span>[520]情侣皮肤 所有等待，只为重逢</span><span>05/22</span>
+                        <span>[新闻]</span><span>|</span><span> 【520情侣皮肤】 所有等待，只为重逢</span><span>05/22</span>
                     </div>
                 </swiper-slide>
             </swiper>
@@ -90,8 +90,15 @@
         .nav-item{
             width: 25%;
             border-left:1px solid $border-color;
+            margin-bottom: 1.5rem;
             &:nth-child(4n+1){
              border-left: none;
+            }
+            p{
+                -webkit-margin-before: 0;
+                -webkit-margin-after: 0;
+                margin-block-start: 0;
+                margin-block-end: 0;
             }
         }
     }
