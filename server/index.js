@@ -12,6 +12,7 @@ app.set('secret','fdshjfhs');
 
 require('./routes/admin')(app);
 require('./plugins/db,')(app);
+require('./routes/web')(app);
 
 app.listen(3000,()=>{
     console.log('App listening on port 3000');
