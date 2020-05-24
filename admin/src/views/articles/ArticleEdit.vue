@@ -61,7 +61,7 @@
             },
             async fetchCategories(){
                 const res = await this.$http.get('rest/categories');
-                this.categories = res.data;
+                this.categories = res.data.slice(0).filter(el=>el.parent&&el.parent.name==='新闻资讯');
             },
             async handleImageAdded(file,Editor,cursorLocation,resetUploader){
                 const formData = new FormData();

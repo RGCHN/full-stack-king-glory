@@ -143,7 +143,6 @@
             },
             async save(){
                 let res;
-                //根据有无id判断是新建还是编辑分类
                 if(this.id){
                     res = await this.$http.put(`rest/hero/${this.id}`,this.model);
                 }else{
@@ -165,7 +164,7 @@
             async fetchCategories(){
                 //请求分类列表 确定英雄的类型选项有哪些
                 const res = await this.$http.get(`rest/categories`);
-                this.categories = res.data;
+                this.categories = res.data.slice(0).filter(el=> el.parent&&el.parent.name==='英雄');
             },
             async fetchItems(){
                 const res = await this.$http.get(`rest/items`);

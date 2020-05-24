@@ -19,32 +19,34 @@
                 <span>收起</span>
             </div>
         </div>
+        <m-list-card icon="cc-menu-circle" title="新闻资讯" :categories="newCats">
+            <template #items="{category}">
+                <div class="py-2 fs-lg d-flex" v-for="(news,i) in category.newsList" :key="i">
+                    <span class="text-info">[{{news.categoriesName}}]</span>
+                    <span class="px-2">|</span>
+                    <span class="flex-1 text-dark-lighter text-ellipsis pr-2">{{news.title}}</span>
+                    <span class="text-gray-lighter fs-sm">{{news.createdAt|date}}</span>
+                </div>
+            </template>
+        </m-list-card>
 
-        <m-card icon="cc-menu-circle" title="新闻资讯">
-            <div class="nav jc-between">
-                <div class="nav-item active">热门</div>
-                <div class="nav-item">新闻</div>
-                <div class="nav-item">公告</div>
-                <div class="nav-item">活动</div>
-                <div class="nav-item">赛事</div>
-            </div>
-
-            <swiper>
-                <swiper-slide v-for="i in 5" :key="i">
-                    <div v-for="n in 6" :key="n" class="pt-3">
-                        <span>[新闻]</span><span>|</span><span> 【520情侣皮肤】 所有等待，只为重逢</span><span>05/22</span>
-                    </div>
-                </swiper-slide>
-            </swiper>
-        </m-card>
+        <m-list-card icon="card-hero" title="英雄列表" :categories="[]"></m-list-card>
+        <m-list-card icon="card-hero" title="精彩视频" :categories="[]"></m-list-card>
+        <m-list-card icon="card-hero" title="图文攻略" :categories="[]"></m-list-card>
 
 
     </div>
     
 </template>
 <script>
+    import dayjs from 'dayjs'
     export default {
         name: "Home",
+        filters:{
+            date(val){
+                return dayjs(val).format('MM/DD')
+            }
+        },
         data() {
             return {
                 swiperOptions: {
@@ -66,9 +68,20 @@
                     'sprite-version': '版本介绍',
                     'sprite-env':'对局环境',
                     'sprite-inf':'无限王者团',
-                }
+                },
+                newCats:[]
             }
         },
+        created(){
+            this.fetchNewsCats();
+        },
+        methods:{
+            async fetchNewsCats(){
+                const res = await this.$http.get('news/list')
+                this.newCats = res.data;
+            }
+
+        }
 
     }
 </script>

@@ -42,6 +42,13 @@ a{
         font-size:$size * $base-font-size;
     }
 }
+//文字相关
+.text-ellipsis{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+}
 
 //宽度、高度相关样式
 .w-100{
@@ -132,9 +139,9 @@ a{
     .nav-item{
         border-bottom: 3px solid transparent;
         padding-bottom: 0.2rem;
-        color:map-get($colors,'primary');
         &.active{
             border-bottom-color:map_get($colors,'primary');
+            color:map-get($colors,'primary');
         }
     }
     &.nav-inverse{
