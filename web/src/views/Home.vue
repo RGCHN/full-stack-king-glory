@@ -30,7 +30,16 @@
             </template>
         </m-list-card>
 
-        <m-list-card icon="card-hero" title="英雄列表" :categories="[]"></m-list-card>
+        <m-list-card icon="card-hero" title="英雄列表" :categories="heroCats">
+            <template #items="{category}">
+                <div class="d-flex flex-wrap" style="margin:0 -0.5rem;">
+                    <div class="p-2 text-center hero-box" v-for="(hero,i) in category.heroesList" :key="i">
+                        <img class="w-100" :src="hero.avatar">
+                        <div class="text-info">{{hero.name}}</div>
+                    </div>
+                </div>
+            </template>
+        </m-list-card>
         <m-list-card icon="card-hero" title="精彩视频" :categories="[]"></m-list-card>
         <m-list-card icon="card-hero" title="图文攻略" :categories="[]"></m-list-card>
 
@@ -69,16 +78,22 @@
                     'sprite-env':'对局环境',
                     'sprite-inf':'无限王者团',
                 },
-                newCats:[]
+                newCats:[],
+                heroCats:[]
             }
         },
         created(){
             this.fetchNewsCats();
+            this.fetchHeroList();
         },
         methods:{
             async fetchNewsCats(){
                 const res = await this.$http.get('news/list')
                 this.newCats = res.data;
+            },
+            async fetchHeroList(){
+                const res = await this.$http.get('heroes/list')
+                this.heroCats = res.data;
             }
 
         }
@@ -114,6 +129,9 @@
                 margin-block-end: 0;
             }
         }
+    }
+    .hero-box{
+        width: 20%;
     }
 
 </style>
