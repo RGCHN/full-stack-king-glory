@@ -19,6 +19,7 @@ a{
     color:#999;
 }
 
+
 //定义文字和背景颜色 键值对
 @each $colorKey,$color in $colors{
     .text-#{$colorKey}{
@@ -230,3 +231,9 @@ a{
 
 }
 
+//边框相关
+@each $dir in (top,right,bottom,left){
+    .border-#{$dir}{
+        border-#{$dir}:1px solid $border-color;
+    }
+}

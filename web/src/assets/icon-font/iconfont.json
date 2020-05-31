@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "215673",
+      "name": "图文",
+      "font_class": "tuwen",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
       "icon_id": "372210",
       "name": "cc-menu-circle",
       "font_class": "cc-menu-circle",
@@ -27,11 +34,32 @@
       "unicode_decimal": 58911
     },
     {
+      "icon_id": "7002474",
+      "name": "视频",
+      "font_class": "shipin",
+      "unicode": "e6bb",
+      "unicode_decimal": 59067
+    },
+    {
+      "icon_id": "7863273",
+      "name": "链接 (1)",
+      "font_class": "lianjie",
+      "unicode": "e6ce",
+      "unicode_decimal": 59086
+    },
+    {
       "icon_id": "8552485",
       "name": "menu",
       "font_class": "menu",
       "unicode": "e63b",
       "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "10344471",
+      "name": "返 回",
+      "font_class": "back",
+      "unicode": "e501",
+      "unicode_decimal": 58625
     }
   ]
 }

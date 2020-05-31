@@ -3,7 +3,7 @@
         <h1>{{id?'编辑':'新建'}}分类</h1>
         <el-form label-width="80px" @submit.native.prevent="save">
             <el-form-item label="上级分类">
-                <el-select v-model="model.parent">
+                <el-select filterable v-model="model.parent">
                     <el-option v-for="item in parents" :key="item._id"
                     :label="item.name" :value="item._id">
                     </el-option>

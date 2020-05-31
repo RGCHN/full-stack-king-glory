@@ -2,8 +2,8 @@
     <div class="HeroEdit">
         <h1>{{id?'编辑':'新建'}}英雄</h1>
         <el-form label-width="80px" @submit.native.prevent="save">
-            <el-tabs type="border-card" value="skills">
-                <el-tab-pane label="基础信息">
+            <el-tabs type="border-card" value="basic">
+                <el-tab-pane label="基础信息" name="basic">
                     <el-form-item label="名称" style="margin-top: 2rem">
                         <el-input v-model="model.name"></el-input>
                     </el-form-item>
@@ -18,8 +18,20 @@
                                 :action="uploadUrl"
                                 :headers="getAuthHeaders()"
                                 :show-file-list="false"
-                                :on-success="afterUpload">
+                                :on-success="res=>$set(model,'avatar',res.url)">
                             <img v-if="model.avatar" :src="model.avatar" class="avatar">
+                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
+                    </el-form-item>
+
+                    <el-form-item label="背景图">
+                        <el-upload
+                                class="avatar-uploader"
+                                :action="uploadUrl"
+                                :headers="getAuthHeaders()"
+                                :show-file-list="false"
+                                :on-success="res=>$set(model,'banner',res.url)">
+                            <img v-if="model.banner" :src="model.banner" class="banner">
                             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
@@ -49,14 +61,14 @@
                     </el-form-item>
 
                     <el-form-item label="顺风出装">
-                        <el-select v-model="model.item1" multiple>
+                        <el-select filterable v-model="model.item1" multiple>
                             <el-option v-for="item in items" :key="item._id"
                                        :label="item.name" :value="item._id"></el-option>
                         </el-select>
                     </el-form-item>
 
-                    <el-form-item label="逆风出装">
-                        <el-select v-model="model.item2" multiple>
+                    <el-form-item  label="逆风出装">
+                        <el-select filterable v-model="model.item2" multiple>
                             <el-option v-for="item in items" :key="item._id"
                                        :label="item.name" :value="item._id"></el-option>
                         </el-select>
@@ -95,14 +107,41 @@
                                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                 </el-upload>
                             </el-form-item>
+                            <el-form-item label="冷却值">
+                                <el-input v-model="item.coolDown" type="textarea"></el-input>
+                            </el-form-item>
+                            <el-form-item label="消耗">
+                                <el-input v-model="item.cost" type="textarea"></el-input>
+                            </el-form-item>
+
                             <el-form-item label="描述">
                                  <el-input v-model="item.description" type="textarea"></el-input>
                             </el-form-item>
-                            <el-form-item label="小提示">
-                                <el-input v-model="item.tips" type="textarea"></el-input>
-                            </el-form-item>
+
                             <el-form-item>
                                 <el-button size="small" type="danger" @click="model.skills.splice(index,1)">
+                                    删除</el-button>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </el-tab-pane>
+                <el-tab-pane label="英雄关系" name="partners">
+                    <el-button size="small" @click="model.partners.push({})">
+                        <i class="el-icon-plus"></i>  添加英雄
+                    </el-button>
+                    <el-row type="flex" style="flex-wrap: wrap;margin-top:2rem">
+                        <el-col :md="12" v-for="(item,index) in model.partners" :key="index">
+                            <el-form-item label="英雄">
+                                <el-select filterable v-model="item.hero">
+                                    <el-option v-for="hero in heroes" :key="hero._id" :value="hero._id" :label="hero.name"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="描述">
+                                <el-input v-model="item.description" type="textarea"></el-input>
+                            </el-form-item>
+
+                            <el-form-item>
+                                <el-button size="small" type="danger" @click="model.partners.splice(index,1)">
                                     删除</el-button>
                             </el-form-item>
                         </el-col>
@@ -127,20 +166,18 @@
                 model:{
                     name:'',
                     avatar:'',
+                    heroes:[],
                     scores:{
                         difficult: 0,
                     },
                     skills:[],
+                    partners:[],
                 },
                 categories:[],
                 items:[],
             }
         },
         methods:{
-            afterUpload(res){
-                //在定义数据时把属性定义好了 就不会发生响应式失效 可以用普通赋值方式
-                this.model.avatar = res.url;
-            },
             async save(){
                 let res;
                 if(this.id){
@@ -150,7 +187,7 @@
                 }
 
                 //创建完毕后跳转到分类列表
-                await  this.$router.push('/hero/list');
+                //await  this.$router.push('/hero/list');
                 this.$message({
                     type:'success',
                     message:'保存成功！'
@@ -169,12 +206,17 @@
             async fetchItems(){
                 const res = await this.$http.get(`rest/items`);
                 this.items = res.data;
+            },
+            async fetchHeroes(){
+                const res = await this.$http.get(`rest/heroes`);
+                this.heroes = res.data;
             }
         },
         created() {
-            this.id && this.fetch();
             this.fetchCategories();
             this.fetchItems();
+            this.fetchHeroes();
+            this.id && this.fetch();
         }
     }
 </script>
@@ -200,6 +242,10 @@
     }
     .avatar {
         width: 5rem;
+        height: 5rem;
+        display: block;
+    }
+    .banner{
         height: 5rem;
         display: block;
     }

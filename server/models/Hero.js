@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const schema = new mongoose.Schema({
     name:{type:String},
     avatar:{type: String},
+    banner:{type:String},
     title:{type:String},
     //分类不仅有一个 可能要关联多个 用数组存储
     categories:[{type:mongoose.SchemaTypes.ObjectID,ref:'Category'}],
@@ -16,8 +17,9 @@ const schema = new mongoose.Schema({
     skills:[{
         icon:{type:String},
         name:{type:String},
+        coolDown:{type:String},
+        cost:{type:String},
         description:{type:String},
-        tips:{type:String},
     }],
     item1:[{
         type:mongoose.SchemaTypes.ObjectID,ref:'Item',
