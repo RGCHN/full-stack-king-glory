@@ -41,17 +41,20 @@
             </template>
         </m-list-card>
 
-        <m-list-card icon="shipin" title="精彩视频" :categories="VideoCats">
+        <m-list-card icon="shipin" title="精彩视频" :categories="videoCats">
             <template #items="{category}">
-                <div class="video-list" v-for="(v,index) in category.videoList" :key="index">
-                    <img :src="v.preview" alt="">
-                    <div class="title">{{v.title}}</div>
-                    <div class="others">
-                        <span>{{v.playTimes}}</span>
-                        <span>{{v.date}}</span>
+                <div class="video-list d-flex flex-wrap jc-between ai-end" >
+                    <div class="video-item py-2" v-for="(v,index) in category.videoList" :key="index">
+                        <img :src="v.preview" alt="">
+                        <p class="title">{{v.title}}</p>
+                        <div class="others pt-2">
+                            <span class="playTimes">{{v.playTimes}}</span>
+                            <span class="date">{{v.date}}</span>
+                        </div>
                     </div>
                 </div>
             </template>
+            <div class="more">加载更多内容</div>
         </m-list-card>
         <m-list-card icon="tuwen" title="图文攻略" :categories="[]"></m-list-card>
 
@@ -111,12 +114,8 @@
             },
             async fetchVideoList(){
                 const res = await this.$http.get('videos/list');
-                for(let s of res.data){
-                    this.videoCats.push(s);
-                }
-                console.log(this.videoCats)
-                console.log(typeof this.videoCats)
-            }
+                this.videoCats = res.data;
+            },
         }
 
     }
@@ -154,5 +153,30 @@
     .hero-box{
         width: 20%;
     }
+    .video-list{
+        .video-item{
+            width: 48%;
+            img{
+                width: 100%;
+            }
+            p{
+                margin-block-start: 0;
+                margin-block-end:0;
+                line-height:200%;
+            }
+            .date{
+                float: right;
+            }
+            .title{
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp:2;
+                overflow: hidden;
+            }
+
+        }
+
+    }
+
 
 </style>
