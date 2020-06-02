@@ -28,7 +28,6 @@ module.exports = app => {
     })
 
 
-
     //categories是mongodb的实例模型，直接在正面进行数据库的crud
     //创建资源
     router.post('/',async(req,res)=>{

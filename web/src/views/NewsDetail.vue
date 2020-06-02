@@ -1,7 +1,7 @@
 <template>
     <div class="news-detail" v-if="article">
         <div class="d-flex py-3 px-1 border-bottom">
-            <div class="iconfont icon-back text-blue pr-1"></div>
+            <div class="iconfont icon-back text-blue pr-1" @click="backClick"></div>
             <strong class="flex-1 text-blue">{{article.title}}</strong>
             <div class="text-gray fs-xs">2020-05-18</div>
         </div>
@@ -44,6 +44,9 @@
                 const res = await this.$http.get(`/articles/${this.id}`);
                 this.article = res.data;
                 console.log(this.article)
+            },
+            backClick(){
+                this.$router.push('/');
             }
         },
         created(){

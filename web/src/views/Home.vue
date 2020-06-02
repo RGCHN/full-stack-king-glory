@@ -40,14 +40,17 @@
                 </div>
             </template>
         </m-list-card>
-        <m-list-card icon="cc-menu-circle" title="精彩视频" :categories="newCats">
+
+        <m-list-card icon="shipin" title="精彩视频" :categories="VideoCats">
             <template #items="{category}">
-                <router-link tag="div" :to="`/news/${news._id}`" class="py-2 fs-lg d-flex" v-for="(news,i) in category.newsList" :key="i">
-                    <span class="text-info">[{{news.categoriesName}}]</span>
-                    <span class="px-2">|</span>
-                    <span class="flex-1 text-dark-lighter text-ellipsis pr-2">{{news.title}}</span>
-                    <span class="text-gray-lighter fs-sm">{{news.createdAt|date}}</span>
-                </router-link>
+                <div class="video-list" v-for="(v,index) in category.videoList" :key="index">
+                    <img :src="v.preview" alt="">
+                    <div class="title">{{v.title}}</div>
+                    <div class="others">
+                        <span>{{v.playTimes}}</span>
+                        <span>{{v.date}}</span>
+                    </div>
+                </div>
             </template>
         </m-list-card>
         <m-list-card icon="tuwen" title="图文攻略" :categories="[]"></m-list-card>
@@ -88,12 +91,14 @@
                     'sprite-inf':'无限王者团',
                 },
                 newCats:[],
-                heroCats:[]
+                heroCats:[],
+                videoCats:[],
             }
         },
         created(){
             this.fetchNewsCats();
             this.fetchHeroList();
+            this.fetchVideoList();
         },
         methods:{
             async fetchNewsCats(){
@@ -103,6 +108,14 @@
             async fetchHeroList(){
                 const res = await this.$http.get('heroes/list')
                 this.heroCats = res.data;
+            },
+            async fetchVideoList(){
+                const res = await this.$http.get('videos/list');
+                for(let s of res.data){
+                    this.videoCats.push(s);
+                }
+                console.log(this.videoCats)
+                console.log(typeof this.videoCats)
             }
         }
 

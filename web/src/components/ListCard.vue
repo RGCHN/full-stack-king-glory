@@ -10,8 +10,8 @@
             <div class="pt-3">
                 <swiper ref="ListSwiper" :options="{autoHeight:true}"
                         @slide-change="()=>this.isActive = swiper.realIndex">
-                    <swiper-slide v-for="(category, i) in categories" :key="i">
-                        <slot name="items" :category="category"></slot>
+                    <swiper-slide v-for="(c, i) in categories" :key="i">
+                        <slot name="items" :category="c"></slot>
                     </swiper-slide>
                 </swiper>
             </div>
