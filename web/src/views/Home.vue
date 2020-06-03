@@ -52,7 +52,7 @@
                                     <span class="iconfont icon-shipin"> </span>
                                     {{getPlayTimes(v.playTimes)}}
                                 </div>
-                                <span class="date">{{v.date}}</span>
+                                <span class="date">{{getSimpleDate(v.date)}}</span>
                             </div>
                         </div>
                     </div>
@@ -62,9 +62,16 @@
 
         <m-list-card icon="tuwen" title="图文攻略" :categories="walkthroughCats" :auto-h="false">
             <template #items="{category}">
-                <div class="d-flex flex-wrap jc-between ai-end" >
-                    <div class="video-item py-2" v-for="(v,index) in category.walkthroughList" :key="index">
-                        <img :src="v.preview" alt="">
+                <div class="walkthrough-list d-flex flex-wrap jc-between ai-end" >
+                    <div class="walkthrough-item py-2 d-flex" v-for="(w,index) in category.walkthroughList" :key="index">
+                        <div class="left mr-2">
+                            <img :src="w.preview" alt="">
+                        </div>
+                        <div class="info text-ellipsis flex-1">
+                            <div class="title fs-lg">{{w.title}}</div>
+                            <div class="des text-gray fs-sm">{{w.title}}</div>
+                            <div class="date text-gray fs-xs">{{getSimpleDate(w.date)}}</div>
+                        </div>
                     </div>
                 </div>
             </template>
@@ -139,6 +146,9 @@
                     return original/10000 + '万';
                 }
                 return original
+            },
+            getSimpleDate(original){
+                return original.substr(5);
             }
         }
 
@@ -200,6 +210,20 @@
         }
 
     }
+    .walkthrough-item{
+        .left{
+            height: 5.385rem;
+            width: 8.923rem;
+        }
+        img{
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.154rem;
+        }
+
+    }
+
 
 
 
