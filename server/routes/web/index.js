@@ -7,7 +7,7 @@ module.exports = app=>{
     const Hero = mongoose.model('Hero');
     const Item = mongoose.model('Item');
     const Video = mongoose.model('Video')
-    //路由仅用于数据录入
+    //路由仅用于数据录入 录入数据的路由不要手贱随便操作 （；´д｀）ゞ
 
     //导入新闻数据
     router.get('/news/init',async(req,res)=>{
@@ -107,7 +107,7 @@ module.exports = app=>{
                 hero.categories = [category];
                 return hero;
             })
-            await Hero.insertMany(cat.heros);
+            //await Hero.insertMany(cat.heros);
         }
         res.send(await Hero.find());
     })

@@ -32,9 +32,9 @@
                     </el-menu-item-group>
 
                     <el-menu-item-group>
-                        <template slot="title">分类</template>
-                        <el-menu-item index="/categories/create">新建分类</el-menu-item>
-                        <el-menu-item index="/categories/list">分类列表</el-menu-item>
+                        <template slot="title">攻略</template>
+                        <el-menu-item index="/walkthrough/create">新建攻略</el-menu-item>
+                        <el-menu-item index="/walkthrough/list">攻略列表</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
 

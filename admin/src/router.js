@@ -23,6 +23,9 @@ const AdminUserList = ()=>import('./views/admin/AdminUserList');
 const VideoEdit = ()=>import('./views/Video/VideoEdit');
 const VideoList = ()=>import('./views/Video/VideoList');
 
+const WalkthroughEdit = ()=>import('./views/Walkthrough/WalkthroughEdit');
+const WalkthroughList = ()=>import('./views/Walkthrough/WalkthroughList');
+
 const Login = ()=>import('./views/Login');
 
 Vue.use(VueRouter);
@@ -60,6 +63,10 @@ const routes = [
             {path:'/video/create', component:VideoEdit},
             {path:'/video/list', component:VideoList},
             {path:'/video/edit/:id',component:VideoEdit,props:true},
+
+            {path:'/walkthrough/create', component:WalkthroughEdit},
+            {path:'/walkthrough/list', component:WalkthroughList},
+            {path:'/walkthrough/edit/:id',component:WalkthroughEdit,props:true},
         ]
     },
 
