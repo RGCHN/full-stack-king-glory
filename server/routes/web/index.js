@@ -6,8 +6,9 @@ module.exports = app=>{
     const Article = mongoose.model('Article');
     const Hero = mongoose.model('Hero');
     const Item = mongoose.model('Item');
-    const Video = mongoose.model('Video')
-    //路由仅用于数据录入 录入数据的路由不要手贱随便操作 （；´д｀）ゞ
+    const Video = mongoose.model('Video');
+    const Walkthrough = mongoose.model('Walkthrough')
+    //路由仅用于数据录入 谨慎点开init路由 （；´д｀）ゞ
 
     //导入新闻数据
     router.get('/news/init',async(req,res)=>{
@@ -180,6 +181,46 @@ module.exports = app=>{
             }
         ])
         req.send(cats);
+    })
+
+    //图文攻略
+    //录入数据 最新
+    router.get('/walkthrough/init',async(res,req)=>{
+        await Walkthrough.deleteMany();
+        const rawData = [{"title":"剑仙李白与女王芈月，有些人是无法被征服的","preview":"https://itea-cdn.qq.com/file/tgl/2020060319/c9f0f895fb98ab9159f51fd0297e236d.1591184953.cfb9c76cae58b570219c09ab0d24c6cf.230x140_54552.jpg"},{"title":"攻略文｜上官婉儿的天狼绘梦者来了，学会3招让你玩转这个法师！","preview":"https://itea-cdn.qq.com/file/tgl/2020060320/30565a8911a6bb487e3745c0ea3c8224.1591187235.2298e907eb0f06a1cb1f795e86a3ae95.230x140_69062.png"},{"title":"上官婉儿天狼绘梦者6折起，孤影直呼太美，五虎限定什么时候出","preview":"https://itea-cdn.qq.com/file/tgl/2020060319/e55f48c24127e6933291dba523b13296.1591184821.61e085d7855ae4dc741f0053d46f9ae1.230x140_77628.png"},{"title":"s19赛季小乔的进阶玩法，掌握进场时机团战瞬间带走对手","preview":"https://itea-cdn.qq.com/file/tgl/2020060223/d8fd93dcb07f1ce3d5ff992ecc745b8e.1591111596.90e9736973c80f146b01e3a5f53eee6c.184x124_45283.jpg"},{"title":"王者荣耀：推塔流法师的荣光，一位登上KPL，另一位却坐冷板凳","preview":"https://itea-cdn.qq.com/file/tgl/2020060317/83d3a9409143b5e4c77ba4d6a14f3b5b.1591176834.3696890855e66a0ff45f792485986cc2.184x124_54940.png"},{"title":"王者荣耀：马可细节教程，让你的马可波罗高人一阶","preview":"https://itea-cdn.qq.com/file/tgl/2020060311/ba807a9bd475b0366917f2e218a7d95c.1591156721.91240ee39496ae6c8a61720087f576f7.184x124_55787.png"},{"title":"高端局T0级别的打野，胜率53.96%，禁用率高达50%","preview":"https://itea-cdn.qq.com/file/tgl/2020060215/235952add03ecffe06d5bbf9cdb3ae16.1591083352.001f0780ecfa1ff866df2f5e0d617389.184x124_39689.jpg"},{"title":"王者荣耀：增2改6，体验服更新，法师装备面临大调整","preview":"https://itea-cdn.qq.com/file/tgl/2020060213/1ad06ee75e5fbd8f398e19d1f4ba0309.1591074366.8f7b17ec7c20ada164d734da51012fe4.184x124_55581.png"},{"title":"KPL：LGD季后赛原形毕露！制裁强队的不是版本，而是线下赛","preview":"https://itea-cdn.qq.com/file/tgl/2020053122/1dd9735b83fc4a8aeab756f90c763bcb.1590936178.23f5f958335d7efcf7714c43edbe70c1.184x124_52194.png"},{"title":"英雄细节篇｜你真的了解亚瑟的大招吗？","preview":"https://itea-cdn.qq.com/file/tgl/2020053120/96a3be3cf272e017046d1b2674a52bd3.1590929226.4760073bbb97eb5b23998ce89322607a.184x124_52716.png"},{"title":"王者荣耀从逐梦到天狼星,，KPL从未让人失望，今年会花落谁家","preview":"https://itea-cdn.qq.com/file/tgl/2020060214/cfcd208495d565ef66e7dff9f98764da.1591080420.79f7e4788900407bf9f340f44f0b7664.184x124_40156.jpg"},{"title":"成都AG卫冕关键战，这一次他们能否再胜DYG？","preview":"https://shp.qpic.cn/cfwebcap/0/a8548fb8e90032a0f0225dd861ff325e/0/?width=230&height=140"},{"title":"小变化竟堪比史诗级加强　小萝莉终成中路大法王","preview":"https://itea-cdn.qq.com/file/tgl/2020060213/d57cad249e01bd8160803693daf94174.1591075692.083cb38d0a33972d0b4d68831b646865.184x124_58738.png"},{"title":"让我们恭喜广州TTG.XQ4：2杭州LGD大鹅！进入四强！！","preview":"https://itea-cdn.qq.com/file/tgl/2020053120/627c48f05eef473971697bf0cdd1144b.1590929071.6f4bfd69cbab566200acb95007e8f81d.184x124_38033.jpg"},{"title":"王者荣耀：坦克崛起版本，AP梦奇比AD梦奇更适合使用（下篇）","preview":"https://itea-cdn.qq.com/file/tgl/2020060222/1d2212c918e9386543a4371d31aa8e63.1591107486.c9a8c34fa55622ece1fa64cc3fe8fdbd.230x140_82691.png"},{"title":"开黑骚套路，蒙恬将军+工具人王昭君，蒙恬有了第五位工具人？","preview":"https://itea-cdn.qq.com/file/tgl/2020060310/373799c476ef93f25b919cbf9dd58a00.1591150247.123289ca42ce34517f1e817e2a030110.230x140_78772.png"}];
+        const parent = await Category.findOne({
+            name:'最新'
+        })
+        const list = rawData.map(el=>{
+            return{
+                categories:[parent],
+                title:el.title,
+                preview:el.preview,
+                date:'2020-06-03',
+                body:'',
+            }
+        })
+        await Walkthrough.insertMany(list);
+        req.send(list);
+    })
+
+    //获取数据接口
+    router.get('/walkthrough/list',async(res,req)=>{
+        const parent = await Category.findOne({
+            name:'图文攻略'
+        });
+        const cats = await Category.aggregate([
+            {$match:{parent:parent._id}},
+            {
+                $lookup:{
+                    from:'walkthroughs',
+                    localField:'_id',
+                    foreignField:'categories',
+                    as:'walkthroughList'
+                }
+            }
+        ])
+        req.send(cats)
     })
 
 

@@ -60,7 +60,15 @@
         </m-list-card>
         <div class="load-more text-center text-gray-lighter bg-white py-3 fs-sm">加载更多内容</div>
 
-        <m-list-card icon="tuwen" title="图文攻略" :categories="[]"></m-list-card>
+        <m-list-card icon="tuwen" title="图文攻略" :categories="walkthroughCats" :auto-h="false">
+            <template #items="{category}">
+                <div class="d-flex flex-wrap jc-between ai-end" >
+                    <div class="video-item py-2" v-for="(v,index) in category.walkthroughList" :key="index">
+                        <img :src="v.preview" alt="">
+                    </div>
+                </div>
+            </template>
+        </m-list-card>
 
 
     </div>
@@ -100,12 +108,14 @@
                 newCats:[],
                 heroCats:[],
                 videoCats:[],
+                walkthroughCats:[],
             }
         },
         created(){
             this.fetchNewsCats();
             this.fetchHeroList();
             this.fetchVideoList();
+            this.fetchWalkthrough();
         },
         methods:{
             async fetchNewsCats(){
@@ -119,6 +129,10 @@
             async fetchVideoList(){
                 const res = await this.$http.get('videos/list');
                 this.videoCats = res.data;
+            },
+            async fetchWalkthrough(){
+              const res= await this.$http.get('walkthrough/list');
+              this.walkthroughCats = res.data;
             },
             getPlayTimes(original){
                 if(original>10000){
