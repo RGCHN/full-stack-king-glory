@@ -42,20 +42,24 @@
         </m-list-card>
 
         <m-list-card icon="shipin" title="精彩视频" :categories="videoCats" :auto-h="false">
-            <template #items="{category}">
-                <div class="video-list d-flex flex-wrap jc-between ai-end" >
-                    <div class="video-item py-2" v-for="(v,index) in category.videoList" :key="index">
-                        <img :src="v.preview" alt="">
-                        <p class="title">{{v.title}}</p>
-                        <div class="others pt-2">
-                            <span class="playTimes">{{v.playTimes}}</span>
-                            <span class="date">{{v.date}}</span>
+                <template #items="{category}">
+                    <div class="video-list d-flex flex-wrap jc-between ai-end" >
+                        <div class="video-item py-2" v-for="(v,index) in category.videoList" :key="index">
+                            <img :src="v.preview" alt="">
+                            <p class="title px-1 fs-lg">{{v.title}}</p>
+                            <div class="others pt-2 px-1 text-gray fs-sm d-flex jc-between ai-end">
+                                <div class="playTimes">
+                                    <span class="iconfont icon-shipin"> </span>
+                                    {{getPlayTimes(v.playTimes)}}
+                                </div>
+                                <span class="date">{{v.date}}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </template>
-            <div class="more">加载更多内容</div>
+                </template>
         </m-list-card>
+        <div class="load-more text-center text-gray-lighter bg-white py-3 fs-sm">加载更多内容</div>
+
         <m-list-card icon="tuwen" title="图文攻略" :categories="[]"></m-list-card>
 
 
@@ -116,6 +120,12 @@
                 const res = await this.$http.get('videos/list');
                 this.videoCats = res.data;
             },
+            getPlayTimes(original){
+                if(original>10000){
+                    return original/10000 + '万';
+                }
+                return original
+            }
         }
 
     }
@@ -162,10 +172,7 @@
             p{
                 margin-block-start: 0;
                 margin-block-end:0;
-                line-height:200%;
-            }
-            .date{
-                float: right;
+                line-height: 150%;
             }
             .title{
                 display: -webkit-box;
@@ -173,10 +180,13 @@
                 -webkit-line-clamp:2;
                 overflow: hidden;
             }
-
+            .icon-shipin{
+                font-size:xx-small;
+            }
         }
 
     }
+
 
 
 </style>

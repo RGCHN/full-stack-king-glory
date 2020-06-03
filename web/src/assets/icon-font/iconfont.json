@@ -34,18 +34,25 @@
       "unicode_decimal": 58911
     },
     {
-      "icon_id": "7002474",
-      "name": "视频",
-      "font_class": "shipin",
-      "unicode": "e6bb",
-      "unicode_decimal": 59067
-    },
-    {
       "icon_id": "7863273",
       "name": "链接 (1)",
       "font_class": "lianjie",
       "unicode": "e6ce",
       "unicode_decimal": 59086
+    },
+    {
+      "icon_id": "8073551",
+      "name": "视频",
+      "font_class": "-",
+      "unicode": "e689",
+      "unicode_decimal": 59017
+    },
+    {
+      "icon_id": "8504226",
+      "name": "视频",
+      "font_class": "shipin",
+      "unicode": "e614",
+      "unicode_decimal": 58900
     },
     {
       "icon_id": "8552485",
