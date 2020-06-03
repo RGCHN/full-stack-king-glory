@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="pt-3">
-                <swiper ref="ListSwiper" :options="{autoHeight:true}"
+                <swiper ref="ListSwiper" :options="{autoHeight:this.autoH}"
                         @slide-change="()=>this.isActive = swiper.realIndex">
                     <swiper-slide v-for="(category, i) in categories" :key="i">
                         <slot name="items" :category="category"></slot>
@@ -26,7 +26,8 @@
         props:{
             icon:{type:String,required:true},
             title:{type:String,required:true},
-            categories:{type:Array,required:true}
+            categories:{type:Array,required:true},
+            autoH:{type:Boolean,default:true}
         },
         computed:{
             swiper(){

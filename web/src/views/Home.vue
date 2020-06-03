@@ -41,7 +41,7 @@
             </template>
         </m-list-card>
 
-        <m-list-card icon="shipin" title="精彩视频" :categories="videoCats">
+        <m-list-card icon="shipin" title="精彩视频" :categories="videoCats" :auto-h="false">
             <template #items="{category}">
                 <div class="video-list d-flex flex-wrap jc-between ai-end" >
                     <div class="video-item py-2" v-for="(v,index) in category.videoList" :key="index">
@@ -155,7 +155,7 @@
     }
     .video-list{
         .video-item{
-            width: 48%;
+            width: 49%;
             img{
                 width: 100%;
             }
