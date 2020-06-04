@@ -62,18 +62,17 @@
 
         <m-list-card icon="tuwen" title="图文攻略" :categories="walkthroughCats">
             <template #items="{category}">
-                <router-link tag="div" :to="`/news/${w._id}`" class="walkthrough-item py-2 fs-lg d-flex"  v-for="(w,index) in category.walkthroughList" :key="index">
+                <router-link tag="div" :to="`/news/${w._id}`" class="walkthrough-item pb-2 pt-3 fs-lg d-flex pl-1"  v-for="(w,index) in category.walkthroughList" :key="index">
                     <div class="left mr-2">
                         <img :src="w.preview" alt="">
                     </div>
-                    <div class="info text-ellipsis flex-1">
-                        <div class="title fs-lg">{{w.title}}</div>
-                        <div class="des text-gray fs-sm">{{w.title}}</div>
-                        <div class="date text-gray fs-xs">{{getSimpleDate(w.date)}}</div>
+                    <div class="info flex-1">
+                        <p class="title fs-xl">{{w.title}}</p>
+                        <p class="des text-gray fs-md">{{w.title}}</p>
+                        <p class="date text-gray-lighter fs-xs">{{getSimpleDate(w.date)}}</p>
                     </div>
                 </router-link>
             </template>
-
         </m-list-card>
     </div>
 </template>
@@ -207,6 +206,7 @@
 
     }
     .walkthrough-item{
+        border-bottom:1px solid $border-color;
         .left{
             height: 5.385rem;
             width: 8.923rem;
@@ -216,6 +216,26 @@
             width: 100%;
             height: 100%;
             border-radius: 0.154rem;
+        }
+        .info{
+            height: 100%;
+            p{
+                margin-block-start: 0;
+                margin-block-end: 0.25rem;
+                word-spacing: 0.5rem;
+            }
+            .title{
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp:1;
+                overflow: hidden;
+            }
+            .des{
+                line-height: 150%;
+            }
+            .date{
+                margin-block-end: 0;
+            }
         }
 
     }
