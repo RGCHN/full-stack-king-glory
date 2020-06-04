@@ -60,26 +60,22 @@
         </m-list-card>
         <div class="load-more text-center text-gray-lighter bg-white py-3 fs-sm">加载更多内容</div>
 
-        <m-list-card icon="tuwen" title="图文攻略" :categories="walkthroughCats" :auto-h="false">
+        <m-list-card icon="tuwen" title="图文攻略" :categories="walkthroughCats">
             <template #items="{category}">
-                <div class="walkthrough-list d-flex flex-wrap jc-between ai-end" >
-                    <div class="walkthrough-item py-2 d-flex" v-for="(w,index) in category.walkthroughList" :key="index">
-                        <div class="left mr-2">
-                            <img :src="w.preview" alt="">
-                        </div>
-                        <div class="info text-ellipsis flex-1">
-                            <div class="title fs-lg">{{w.title}}</div>
-                            <div class="des text-gray fs-sm">{{w.title}}</div>
-                            <div class="date text-gray fs-xs">{{getSimpleDate(w.date)}}</div>
-                        </div>
+                <router-link tag="div" :to="`/news/${w._id}`" class="walkthrough-item py-2 fs-lg d-flex"  v-for="(w,index) in category.walkthroughList" :key="index">
+                    <div class="left mr-2">
+                        <img :src="w.preview" alt="">
                     </div>
-                </div>
+                    <div class="info text-ellipsis flex-1">
+                        <div class="title fs-lg">{{w.title}}</div>
+                        <div class="des text-gray fs-sm">{{w.title}}</div>
+                        <div class="date text-gray fs-xs">{{getSimpleDate(w.date)}}</div>
+                    </div>
+                </router-link>
             </template>
+
         </m-list-card>
-
-
     </div>
-    
 </template>
 <script>
     import dayjs from 'dayjs'
