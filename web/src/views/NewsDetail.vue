@@ -13,7 +13,7 @@
                 </div>
                 <div class="pt-2">
                     <router-link
-                            :to="`/articles/${item._id}`"
+                            :to="`/${type}/${item._id}`"
                             tag="div"
                             v-for="(item,index) in article.related" :key="index"
                             class="py-1 ">
@@ -28,7 +28,8 @@
     export default {
         name: "NewsDetail",
         props: {
-            id: {required: true}
+            id: {required: true},
+            type:{required:true}
         },
         data(){
             return {
@@ -36,14 +37,13 @@
             }
         },
         watch:{
-          id:'fetchNews'
-            //id(){this.fetchNews()}
+          id:'fetchNews',
+          type:'fetchNews'
         },
         methods:{
             async fetchNews() {
-                const res = await this.$http.get(`/articles/${this.id}`);
+                const res = await this.$http.get(`/${this.type}/${this.id}`);
                 this.article = res.data;
-                console.log(this.article)
             },
             backClick(){
                 this.$router.push('/');

@@ -5,6 +5,7 @@ const Home =()=>import('./views/Home')
 const Main =()=>import('./views/Main')
 const NewsDetail = ()=>import('./views/NewsDetail')
 const Hero = ()=>import('./views/Hero')
+const StrategyCenter = ()=>import('./views/StrategyCenter')
 Vue.use(Router)
 
 const routes = [
@@ -14,7 +15,8 @@ const routes = [
       component:Main,
       children:[
           {path:'/',name:'home',component:Home,},
-          {path:'/news/:id',name:'news-detail',component:NewsDetail,props:true}
+          {path:'/:type/:id',name:'news-detail',component:NewsDetail,props:true},
+          {path:'/strategycenter',name:'strategycenter',component:StrategyCenter}
       ]
     },
     {

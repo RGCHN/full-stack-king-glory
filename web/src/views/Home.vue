@@ -1,9 +1,9 @@
 <template>
     <div class="home">
         <swiper :options="swiperOptions">
-            <swiper-slide><img src="../assets/home-images/761f7572f0ecf8a193bfed42efa4c624.jpeg" class="w-100"></swiper-slide>
-            <swiper-slide><img src="../assets/home-images/f5f862d4a9e84e9a59e8768efc1cdbdc.jpeg" class="w-100"></swiper-slide>
-            <swiper-slide><img src="../assets/home-images/c39560c6914a8f5cc2dbe5b7917af022.jpeg" class="w-100"></swiper-slide>
+            <swiper-slide v-for="(img,index) in swiperImgs" :key="index" >
+                <img :src="img.image" alt="" class="vw-100">
+            </swiper-slide>
             <div class="swiper-pagination pagination-home px-3 pb-2" slot="pagination" style="text-align: right"></div>
         </swiper>
 
@@ -62,7 +62,7 @@
 
         <m-list-card icon="tuwen" title="图文攻略" :categories="walkthroughCats">
             <template #items="{category}">
-                <router-link tag="div" :to="`/news/${w._id}`" class="walkthrough-item pb-2 pt-3 fs-lg d-flex pl-1"  v-for="(w,index) in category.walkthroughList" :key="index">
+                <router-link tag="div" :to="`/walkthrough/${w._id}`" class="walkthrough-item pb-2 pt-3 fs-lg d-flex pl-1"  v-for="(w,index) in category.walkthroughList" :key="index">
                     <div class="left mr-2">
                         <img :src="w.preview" alt="">
                     </div>
@@ -111,6 +111,7 @@
                 heroCats:[],
                 videoCats:[],
                 walkthroughCats:[],
+                swiperImgs: []
             }
         },
         created(){
@@ -118,6 +119,7 @@
             this.fetchHeroList();
             this.fetchVideoList();
             this.fetchWalkthrough();
+            this.fetchSwiperImgs();
         },
         methods:{
             async fetchNewsCats(){
@@ -135,6 +137,10 @@
             async fetchWalkthrough(){
               const res= await this.$http.get('walkthrough/list');
               this.walkthroughCats = res.data;
+            },
+            async fetchSwiperImgs(){
+              const res = await this.$http.get('ads/homepage-swiper');
+              this.swiperImgs = res.data[0].items;
             },
             getPlayTimes(original){
                 if(original>10000){
@@ -220,15 +226,15 @@
         .info{
             height: 100%;
             p{
-                margin-block-start: 0;
+                margin-block-start: 0.1rem;
                 margin-block-end: 0.25rem;
-                word-spacing: 0.5rem;
             }
             .title{
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp:1;
                 overflow: hidden;
+                line-height: 100%;
             }
             .des{
                 line-height: 150%;

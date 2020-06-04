@@ -9,16 +9,8 @@
       <button type="button" class="btn bg-primary">立即下载</button>
     </div>
     <div class="nav bg-primary pt-3 pb-2 nav-inverse pb-1 jc-around">
-        <div class="nav-item active">
-          <router-link class="nav-link" tag="div" to="/">首页</router-link>
-        </div>
-
-        <div class="nav-item">
-          <router-link class="nav-link" tag="div" to="/">攻略中心</router-link>
-        </div>
-
-        <div class="nav-item">
-          <router-link class="nav-link" tag="div" to="/">赛事中心</router-link>
+        <div class="nav-item" v-for="(c,index) in cpn" :key="index" :class="{active:index===activeIndex}" @click="activeIndex=index">
+            <router-link class="nav-link" tag="div" :to=c.link>{{c.title}}</router-link>
         </div>
     </div>
     <router-view/>
@@ -28,6 +20,16 @@
 <script>
 export default {
   name: 'Main',
+  data(){
+      return{
+          activeIndex:0,
+          cpn:[
+              {title:'首页',link:'/'},
+              {title:'攻略中心',link:'/strategycenter'},
+              {title:'赛事中心',link:'/'}
+              ]
+      }
+  }
 }
 </script>
 <style lang="scss">
@@ -36,6 +38,9 @@ export default {
     position: sticky;
     top:0;
     z-index: 99;
+    .btn{
+        height: 1.846rem;
+    }
 
 }
 
