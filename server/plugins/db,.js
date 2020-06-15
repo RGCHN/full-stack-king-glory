@@ -3,7 +3,8 @@ module.exports = app => {
     const mongoose = require("mongoose");
     mongoose.connect('mongodb://127.0.0.1:27017/KingGlory',{
         useNewUrlParser:true,
-        useUnifiedTopology:true
+        useUnifiedTopology:true,
+        useFindAndModify:false
     });
     mongoose.connection.on('error',err=>console.log('Mongoose connection error:'+err));
     mongoose.connection.on('disconnect',()=>console.log('Mongoose connection disconnected'))
