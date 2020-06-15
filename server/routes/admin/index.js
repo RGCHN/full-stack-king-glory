@@ -61,6 +61,21 @@ module.exports = app => {
         res.send(model);
     })
 
+    //用户注册
+    app.post('/admin/api/register',async(req,res)=>{
+        const {username,password} = req.body;
+        const user = await AdminUsers.findOne({username:username});
+        if(user){
+            res.send({flag:false})
+        }else{
+            await AdminUsers.insertMany({
+                username:username,
+                password:password
+            })
+            res.send({flag:true})
+        }
+    })
+
 
     //用户登录密码校验
     app.post('/admin/api/login',async(req,res)=>{

@@ -2,7 +2,7 @@
     <div class="home">
         <swiper :options="swiperOptions">
             <swiper-slide v-for="(img,index) in swiperImgs" :key="index" >
-                <img :src="img.image" alt="" class="vw-100">
+                <img :src="img.image"  alt="" class="vw-100 h-100">
             </swiper-slide>
             <div class="swiper-pagination pagination-home px-3 pb-2" slot="pagination" style="text-align: right"></div>
         </swiper>
@@ -158,6 +158,7 @@
 
 <style lang="scss">
 @import '../assets/scss/variable';
+
     .pagination-home{
         .swiper-pagination-bullet{
             opacity: 1;

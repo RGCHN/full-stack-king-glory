@@ -1,4 +1,4 @@
-module.exports = options=>{
+module.exports = ()=>{
     const assert = require('http-assert');
     const jwt = require('jsonwebtoken');
     const AdminUsers = require('../models/AdminUser');

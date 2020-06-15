@@ -17,8 +17,14 @@ Vue.prototype.$http = axios.create({
 import Card from "./components/Card";
 import ListCard from "./components/ListCard";
 Vue.component('m-list-card',ListCard)
-Vue.component('m-card',Card)
-;
+Vue.component('m-card',Card);
+
+//lazy-load
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload,{
+  loading:require('./assets/load.gif')
+})
+
 Vue.config.productionTip = false
 
 

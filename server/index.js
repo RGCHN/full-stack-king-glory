@@ -1,6 +1,7 @@
 const express = require("express")
 //定义express实例
 const app = express();
+const port = 3000;
 
 app.use(express.json());
 //解决跨域问题
@@ -14,6 +15,6 @@ require('./routes/admin')(app);
 require('./plugins/db,')(app);
 require('./routes/web')(app);
 
-app.listen(3000,()=>{
+app.listen(port,()=>{
     console.log('App listening on port 3000');
 })

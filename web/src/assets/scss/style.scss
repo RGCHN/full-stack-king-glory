@@ -3,7 +3,8 @@
 *{
     //必须修改为border-box 防止增加padding时内容被撑大 网页可以左右移动
     box-sizing: border-box;
-    outline:none
+    outline:none;
+    -webkit-overflow-scrolling:touch
 }
 html{
     //基础字体大小 1rem就是html中font-size的大小
