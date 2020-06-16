@@ -27,11 +27,13 @@ const WalkthroughEdit = ()=>import('./views/Walkthrough/WalkthroughEdit');
 const WalkthroughList = ()=>import('./views/Walkthrough/WalkthroughList');
 
 const Login = ()=>import('./views/Login');
+const Register = ()=>import('./views/Register')
 
 Vue.use(VueRouter);
 
 const routes = [
     {path:'/login', name:'login', component:Login,meta:{isPublic:true}},
+    {path:'/register',name:'register',component:Register,meta:{isPublic: true}},
     {
         path:'/', name:'home', component:Home,
         children:[
