@@ -8,20 +8,24 @@
         </swiper>
 
         <div class="nav-icons bg-white mt-3 text-center pt-3 text-dark-lighter">
-            <div class="d-flex flex-wrap ai-end">
+            <div class="d-flex flex-wrap ai-end nav-content">
                 <div class="nav-item pt-2" v-for="(value,key,index) in navList" :key="index">
                     <i class="sprite" :class="key"></i>
                     <p>{{value}}</p>
                 </div>
             </div>
-            <div class="bg-light py-2 fs-sm">
+            <div v-if="isFold" class="bg-light py-2 fs-sm foldContent"  @click="foldContent">
+                <i class="iconfont icon-zhankai px-1"></i>
+                <span>展开</span>
+            </div>
+            <div v-else class="bg-light py-2 fs-sm foldContent" @click="foldContent" >
                 <i class="iconfont icon-shouqi px-1"></i>
                 <span>收起</span>
             </div>
         </div>
         <m-list-card icon="cc-menu-circle" title="新闻资讯" :categories="newCats">
             <template #items="{category}">
-                <router-link tag="div" :to="`/news/${news._id}`" class="py-2 fs-lg d-flex" v-for="(news,i) in category.newsList" :key="i">
+                <router-link tag="div" :to="`/detail/news/${news._id}`" class="py-2 fs-lg d-flex" v-for="(news,i) in category.newsList" :key="i">
                     <span class="text-info">[{{news.categoriesName}}]</span>
                     <span class="px-2">|</span>
                     <span class="flex-1 text-dark-lighter text-ellipsis pr-2">{{news.title}}</span>
@@ -44,7 +48,7 @@
         <m-list-card icon="shipin" title="精彩视频" :categories="videoCats" :auto-h="false">
                 <template #items="{category}">
                     <div class="video-list d-flex flex-wrap jc-between ai-end" >
-                        <div class="video-item py-2" v-for="(v,index) in category.videoList" :key="index">
+                        <router-link tag="div" :to="`/video/${v._id}`" class="video-item py-2" v-for="(v,index) in category.videoList" :key="index">
                             <img :src="v.preview" alt="">
                             <p class="title px-1 fs-lg">{{v.title}}</p>
                             <div class="others pt-2 px-1 text-gray fs-sm d-flex jc-between ai-end">
@@ -54,15 +58,17 @@
                                 </div>
                                 <span class="date">{{getSimpleDate(v.date)}}</span>
                             </div>
-                        </div>
+                        </router-link>
                     </div>
                 </template>
         </m-list-card>
-        <div class="load-more text-center text-gray-lighter bg-white py-3 fs-sm">加载更多内容</div>
+        <div class="load-more text-center text-gray-lighter bg-white py-3 fs-sm">
+            <a type="text" href="strategyCenter">加载更多内容</a>
+        </div>
 
         <m-list-card icon="tuwen" title="图文攻略" :categories="walkthroughCats">
             <template #items="{category}">
-                <router-link tag="div" :to="`/walkthrough/${w._id}`" class="walkthrough-item pb-2 pt-3 fs-lg d-flex pl-1"  v-for="(w,index) in category.walkthroughList" :key="index">
+                <router-link tag="div" :to="`/detail/walkthrough/${w._id}`" class="walkthrough-item pb-2 pt-3 fs-lg d-flex pl-1"  v-for="(w,index) in category.walkthroughList" :key="index">
                     <div class="left mr-2">
                         <img :src="w.preview" alt="">
                     </div>
@@ -93,7 +99,7 @@
                     },
                     autoplay:{delay:1500},
                 },
-               navList: {
+                navList: {
                     'sprite-news':'爆料站',
                     'sprite-story':'故事站',
                     'sprite-mall':'周边商城',
@@ -111,7 +117,8 @@
                 heroCats:[],
                 videoCats:[],
                 walkthroughCats:[],
-                swiperImgs: []
+                swiperImgs: [],
+                isFold:false
             }
         },
         created(){
@@ -150,6 +157,18 @@
             },
             getSimpleDate(original){
                 return original.substr(5);
+            },
+            foldContent(){
+                if(this.isFold){
+                    this.isFold = !this.isFold;
+                    const content = document.querySelector('.nav-content');
+                    content.style.height =  '204px'
+                }else{
+                    this.isFold = !this.isFold;
+                    const content = document.querySelector('.nav-content');
+                    content.style.height = '60px';
+                }
+
             }
         }
 
@@ -171,20 +190,24 @@
     }
     .nav-icons{
         border-top:1px solid $border-color;
-        .nav-item{
-            width: 25%;
-            border-left:1px solid $border-color;
-            margin-bottom: 1.5rem;
-            &:nth-child(4n+1){
-             border-left: none;
-            }
-            p{
-                -webkit-margin-before: 0;
-                -webkit-margin-after: 0;
-                margin-block-start: 0;
-                margin-block-end: 0;
+        .nav-content{
+            overflow: hidden;
+            .nav-item{
+                width: 25%;
+                border-left:1px solid $border-color;
+                margin-bottom: 1.5rem;
+                &:nth-child(4n+1){
+                    border-left: none;
+                }
+                p{
+                    -webkit-margin-before: 0;
+                    -webkit-margin-after: 0;
+                    margin-block-start: 0;
+                    margin-block-end: 0;
+                }
             }
         }
+
     }
     .hero-box{
         width: 20%;
@@ -211,6 +234,11 @@
             }
         }
 
+    }
+    .load-more{
+        a{
+            text-decoration:none;
+        }
     }
     .walkthrough-item{
         border-bottom:1px solid $border-color;

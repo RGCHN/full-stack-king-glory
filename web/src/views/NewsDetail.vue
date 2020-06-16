@@ -38,7 +38,6 @@
         },
         watch:{
           id:'fetchNews',
-          type:'fetchNews'
         },
         methods:{
             async fetchNews() {

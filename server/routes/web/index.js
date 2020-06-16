@@ -170,6 +170,11 @@ module.exports = app=>{
         req.send(cats);
     })
 
+    router.get('/video/:id',async(req,res)=>{
+        const data = await Video.findById(req.params.id).lean();
+        res.send(data);
+    })
+
     //图文攻略
     //录入数据 最新
     router.get('/walkthrough/init',async(res,req)=>{

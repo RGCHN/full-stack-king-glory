@@ -25,7 +25,7 @@ export default {
           activeIndex:0,
           cpn:[
               {title:'首页',link:'/'},
-              {title:'攻略中心',link:'/strategycenter'},
+              {title:'攻略中心',link:'/strategyCenter'},
               {title:'赛事中心',link:'/'}
               ]
       }
