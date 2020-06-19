@@ -6,6 +6,7 @@ const Main =()=>import('./views/Main')
 const NewsDetail = ()=>import('./views/NewsDetail')
 const Hero = ()=>import('./views/Hero')
 const StrategyCenter = ()=>import('./views/StrategyCenter')
+const CompetitionCenter = ()=>import('./views/CompetitionCenter')
 const VideoPlay = ()=>import('./views/VideoPlay')
 Vue.use(Router)
 
@@ -17,8 +18,9 @@ const routes = [
       children:[
           {path:'/',name:'homePage',component:Home,},
           {path:'/detail/:type/:id',name:'news-detail',component:NewsDetail,props:true},
-          {path:'/strategyCenter',name:'strategyCenter',component:StrategyCenter},
           {path:'/video/:id',name:'videoPlay',component:VideoPlay,props:true},
+          {path:'/strategyCenter',name:'strategyCenter',component:StrategyCenter},
+          {path:'/competitionCenter',name:'competitionCenter',component:CompetitionCenter}
       ]
     },
     {

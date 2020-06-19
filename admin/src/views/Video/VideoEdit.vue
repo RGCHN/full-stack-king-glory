@@ -89,7 +89,7 @@
             async fetchCategories(){
                 //请求分类列表 确定英雄的类型选项有哪些
                 const res = await this.$http.get(`rest/categories`);
-                this.categories = res.data.slice(0).filter(el=> el.parent&&el.parent.name==='精彩视频');
+                this.categories = res.data.slice(0).filter(el=> el.parent&&el.parent.name==='视频');
             },
 
         },

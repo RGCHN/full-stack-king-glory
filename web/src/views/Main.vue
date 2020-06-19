@@ -26,7 +26,7 @@ export default {
           cpn:[
               {title:'首页',link:'/'},
               {title:'攻略中心',link:'/strategyCenter'},
-              {title:'赛事中心',link:'/'}
+              {title:'赛事中心',link:'/competitionCenter'}
               ]
       }
   }

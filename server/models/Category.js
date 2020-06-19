@@ -10,17 +10,21 @@ const schema = new mongoose.Schema({
         ref:'Category'
     }
 })
+//设置虚拟字段
+//子分类
 schema.virtual('children',{
-    localField:'_id',
-    foreignField:'parent',
-    justOne:false,
-    ref:'Category'
+    localField:'_id',//內键 Category模型的_id字段
+    ref:'Category',//关联的模型
+    foreignField:'parent',//外键 关联模型的parent字段
+    justOne:false,//表示返回的不是单条数据 是一个数组
+
 })
 schema.virtual('newsList',{
     localField:'_id',
+    ref:'Article',
     foreignField:'categories',
     justOne:false,
-    ref:'Article'
+
 })
 
 module.exports = mongoose.model('Category',schema)

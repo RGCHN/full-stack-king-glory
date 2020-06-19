@@ -26,6 +26,9 @@ const VideoList = ()=>import('./views/Video/VideoList');
 const WalkthroughEdit = ()=>import('./views/Walkthrough/WalkthroughEdit');
 const WalkthroughList = ()=>import('./views/Walkthrough/WalkthroughList');
 
+const CompetitionEdit = ()=>import('./views/competition/CompetitionEdit');
+const CompetitionList = ()=>import('./views/competition/CompetitionList');
+
 const Login = ()=>import('./views/Login');
 const Register = ()=>import('./views/Register')
 
@@ -68,6 +71,11 @@ const routes = [
             {path:'/walkthrough/create', component:WalkthroughEdit},
             {path:'/walkthrough/list', component:WalkthroughList},
             {path:'/walkthrough/edit/:id',component:WalkthroughEdit,props:true},
+
+            {path:'/competition/create', component:CompetitionEdit},
+            {path:'/competition/list', component:CompetitionList},
+            {path:'/competition/edit/:id',component:CompetitionEdit,props:true},
+
         ]
     },
 

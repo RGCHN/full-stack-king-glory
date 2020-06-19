@@ -36,6 +36,12 @@
                         <el-menu-item index="/walkthrough/create">新建攻略</el-menu-item>
                         <el-menu-item index="/walkthrough/list">攻略列表</el-menu-item>
                     </el-menu-item-group>
+
+                    <el-menu-item-group>
+                        <template slot="title">赛事</template>
+                        <el-menu-item index="/competition/create">新建赛事</el-menu-item>
+                        <el-menu-item index="/competition/list">赛事列表</el-menu-item>
+                    </el-menu-item-group>
                 </el-submenu>
 
                 <el-submenu index="2">

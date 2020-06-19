@@ -5,7 +5,7 @@ module.exports = app => {
     const jwt = require('jsonwebtoken');
     const AdminUsers = require('../../models/AdminUser');
     const router = express.Router({
-        mergeParams:true
+        mergeParams:true,//父级路由合并到子级路由
     });
 
     //登录校验中间件
@@ -37,6 +37,7 @@ module.exports = app => {
     //资源列表 限制100条数据
     router.get('/' ,async(req,res)=>{
         const queryOptions = {};
+        //populate：带出关联的表的ObjectID变成对应的对象
         if(req.Model.modelName === 'Category'){
             queryOptions.populate = 'parent';
         }
@@ -68,7 +69,7 @@ module.exports = app => {
         if(user){
             res.send({flag:false})
         }else{
-            await AdminUsers.insertMany({
+            await AdminUsers.create({
                 username:username,
                 password:password
             })
@@ -90,6 +91,7 @@ module.exports = app => {
 
         }*/
         //校验密码
+        //取出数据库的密码 解析后做验证
         const isValid = require('bcrypt').compareSync(password,user.password)
         assert(isValid,422,'密码错误');
         /*if(!isValid){
@@ -100,7 +102,9 @@ module.exports = app => {
 
         //返回token
         //获取全局配置的secret
-        const token = jwt.sign({id:user._id},app.get('secret'));
+        const token = jwt.sign({id:user._id},app.get('secret'),{
+            expiresIn: 24*24*60,//过期时间 单位s
+        });
         res.send({token})
     })
 

@@ -2,7 +2,6 @@ module.exports = ()=>{
     const assert = require('http-assert');
     const jwt = require('jsonwebtoken');
     const AdminUsers = require('../models/AdminUser');
-
     return async (req,res,next)=>{
         const token = String(req.headers.authorization||'').split(' ').pop();
         assert(token,401,'请先登录')

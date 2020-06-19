@@ -28,7 +28,6 @@
         methods:{
             async save(){
                 let res;
-                //根据有无id判断是新建还是编辑分类
                 if(this.id){
                     res = await this.$http.put(`rest/admin_users/${this.id}`,this.model);
                 }else{
